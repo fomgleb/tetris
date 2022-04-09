@@ -7,24 +7,6 @@ namespace ArrayExtensions
 {
     public static class ArrayExtensions
     {
-        // public static uint GetSolidLineWidth<T>(this T[,] inputTwoDimensionalArray, uint lineIndex)
-        // {
-        //     var lineStarted = false;
-        //     var cellContentLine = new List<EcsEntity>();
-        //
-        //     for (var x = 0; x < line.Length; x++)
-        //     {
-        //         if (line[x].Get<CellContentComponent>().Content == contentToCheck)
-        //         {
-        //             lineStarted = true;
-        //             cellContentLine.Add(line[x]);
-        //         }
-        //         else if (lineStarted)
-        //             break;
-        //     }
-        //
-        //     return cellContentLine;
-        // }
         
         public static T[,] ToTwoDimensionalArray<T>(this T[] inputArray, uint width)
         {

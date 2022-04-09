@@ -35,6 +35,16 @@ MonoBehaviour:
       - line: 00000000
       - line: 01010100
       - line: 01000000
+    - matrix:
+      - line: 00000000
+      - line: 01010000
+      - line: 00010000
+      - line: 00010000
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 01010100
+      - line: 00000000
     matrixWidth: 4
     color: {r: 1, g: 0.9897639, b: 0.14528298, a: 1}
   - rotationStates:

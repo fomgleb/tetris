@@ -30,9 +30,9 @@ namespace Tetris.Scripts.Systems
 
                 var figureMustStop = false;
 
-                for (int y = 0; y < cellsMatrix.GetLength(0); y++)
+                for (var y = 0; y < cellsMatrix.GetLength(0); y++)
                 {
-                    for (int x = 0; x < cellsMatrix.GetLength(1); x++)
+                    for (var x = 0; x < cellsMatrix.GetLength(1); x++)
                     {
                         var cellEntity = cellsMatrix[y, x];
                         
@@ -70,8 +70,9 @@ namespace Tetris.Scripts.Systems
 
                 if (figureMustStop)
                 {
-                    figureEntity.Destroy();
-                    _runtimeData.FiguresSpawnerEntity.Get<SpawnFigureRequest>();                    
+                    _runtimeData.FiguresSpawnerEntity.Get<SpawnFigureRequest>();
+                    figureEntity.Get<FigureStoppedFallingEvent>();
+                    figureEntity.Get<FigureEntityDestroyRequest>();
                 }
             }
         }

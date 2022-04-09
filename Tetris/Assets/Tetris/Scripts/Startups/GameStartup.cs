@@ -49,6 +49,8 @@ namespace Tetris.Scripts.Startups
 
                 Add(new TimeTickSystem()).
                 Add(new FigureStopFallSystem()).
+                Add(new RemoveRawSystem()).
+                Add(new FigureEntityDestroySystem()).
                 Add(new FigureFallSystem()).
                 
                 Add(new FigureMovementSystem()).
@@ -64,16 +66,18 @@ namespace Tetris.Scripts.Startups
         private void AddOneFrames()
         {
             _updateSystems.
-                OneFrame<MoveInputEvent>().
                 OneFrame<FigureFallingSpeedUpInputEvent>().
+                OneFrame<MoveInputEvent>().
                 OneFrame<RotateInputEvent>().
                 OneFrame<TickEvent>().
                 OneFrame<CheckFigureForStopRequest>().
+                OneFrame<FigureStoppedFallingEvent>().
                 OneFrame<InitializeCellRequest>().
                 OneFrame<InitializeContainerRequest>().
                 OneFrame<InitializeFigureRequest>().
                 OneFrame<SpawnFigureRequest>().
-                OneFrame<UpdateGameBoardViewRequest>()
+                OneFrame<UpdateGameBoardViewRequest>().
+                OneFrame<FigureEntityDestroyRequest>()
                 ;
         }
         

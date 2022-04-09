@@ -4,6 +4,7 @@ using Tetris.Data;
 using Tetris.Scripts.Components;
 using Tetris.Scripts.Components.Requests;
 using Tetris.Scripts.Components.Tags;
+using Tetris.Scripts.MonoBehaviours;
 using UnityEngine;
 
 namespace Tetris.Scripts.Systems
@@ -24,10 +25,16 @@ namespace Tetris.Scripts.Systems
 
                 if (cellPositionsToHide != null)
                     foreach (var cellPosition in cellPositionsToHide)
-                        cellsGameBoard[cellPosition.y, cellPosition.x].SetActive(false);
+                    {
+                        var cellGameObjectToUpdate = cellsGameBoard[cellPosition.y, cellPosition.x];
+                            
+                        cellGameObjectToUpdate.SetActive(false);
+                        cellGameObjectToUpdate.GetComponent<EntityReference>().Entity = default;
+                    }
 
                 foreach (var entityIndex in _cellsFilter)
                 {
+                    ref var cellEntity = ref _cellsFilter.GetEntity(entityIndex);
                     ref var positionOnGameBoardComponent = ref _cellsFilter.Get1(entityIndex);
                     ref var colorComponent = ref _cellsFilter.Get2(entityIndex);
                     ref var cellPositionToShow = ref positionOnGameBoardComponent.Position;
@@ -36,6 +43,7 @@ namespace Tetris.Scripts.Systems
                     var cellToUpdate = cellsGameBoard[cellPositionToShow.y, cellPositionToShow.x]; 
                     cellToUpdate.SetActive(true);
                     cellToUpdate.GetComponent<SpriteRenderer>().color = color;
+                    cellToUpdate.GetComponent<EntityReference>().Entity = cellEntity;
                 }
             }
         }
