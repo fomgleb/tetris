@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51995742814048d09e01db06b141149f, type: 3}
+  m_Name: Configuration
+  m_EditorClassIdentifier: 
+  containersGameBoardWidth: 10
+  containersGameBoardHeight: 16
+  containerPrefab: {fileID: 5310667287412813519, guid: e8c0a878a50ac4445a72afc4595c4abd, type: 3}
+  leftTopContainerPosition: {x: 0.5, y: 0.5}
+  indentBetweenContainers: 0
+  cellsGameBoardWidth: 10
+  cellsGameBoardHeight: 19
+  cellPrefab: {fileID: 924992352114114037, guid: ac5bbd9724f38d24b9cd4fe052e1016c, type: 3}
+  leftTopCellPosition: {x: 0.5, y: 3.5}
+  indentBetweenCells: 0
+  oneTickDuration: 1
+  existingFigures:
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00010000
+      - line: 00010000
+      - line: 00010100
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 01010100
+      - line: 01000000
+    matrixWidth: 4
+    color: {r: 1, g: 0.9897639, b: 0.14528298, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 00010100
+      - line: 00010100
+    matrixWidth: 4
+    color: {r: 1, g: 0.2527016, b: 0.14509803, a: 1}
+  figureSpawnPointOnGameBoard: {x: 3, y: 0}
+  timeBetweenFigureMoves: 0.08
+  timeBetweenFigureFallSpeedUps: 0.05
