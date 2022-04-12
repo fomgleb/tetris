@@ -2,7 +2,7 @@
 using Tetris.Data;
 using UnityEngine;
 
-namespace Tetris.Scripts.Systems.Initializations
+namespace Tetris.Scripts.Systems.Init
 {
     public class CellsGameBoardInitSystem : IEcsInitSystem
     {

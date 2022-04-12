@@ -20,15 +20,29 @@ namespace Tetris.Data
         [SerializeField] private GameObject cellPrefab;
         [SerializeField] private Vector2 leftTopCellPosition;
         [SerializeField] private float indentBetweenCells;
+
+        [Header("Next figure board")]
+        [SerializeField] private uint nextFigureBoardWidth;
+        [SerializeField] private uint nextFigureBoardHeight;
+        [SerializeField] private Vector2 leftTopElementPositionOnNextFigureBoard;
         
         [Header("System")]
         [SerializeField] private float oneTickDuration;
         [SerializeField] private Figure[] existingFigures;
         [SerializeField] private Vector2Int figureSpawnPointOnGameBoard;
         [SerializeField] private float timeBetweenFigureMoves;
+        [SerializeField] private float timeAfterFirstMoveClick;
         [SerializeField] private float timeBetweenFigureFallSpeedUps;
+        [SerializeField] private int scoreForFigureFell;
+        [SerializeField] private int scoreForRowRemoved;
+        [SerializeField] private string progressDataFileName;
 
-
+        public int ScoreForFigureFell => scoreForFigureFell;
+        public int ScoreForRowRemoved => scoreForRowRemoved;
+        public float TimeAfterFirstMoveClick => timeAfterFirstMoveClick;
+        public uint NextFigureBoardWidth => nextFigureBoardWidth;
+        public uint NextFigureBoardHeight => nextFigureBoardHeight;
+        public Vector2 LeftTopElementPositionOnNextFigureBoard => leftTopElementPositionOnNextFigureBoard;
         public uint ContainersGameBoardWidth => containersGameBoardWidth;
         public uint ContainersGameBoardHeight => containersGameBoardHeight;
         public GameObject ContainerPrefab => containerPrefab;
@@ -44,6 +58,7 @@ namespace Tetris.Data
         public GameObject CellPrefab => cellPrefab;
         public float TimeBetweenFigureMoves => timeBetweenFigureMoves;
         public float TimeBetweenFigureFallSpeedUps => timeBetweenFigureFallSpeedUps;
+        public string ProgressDataFileName => progressDataFileName;
     }
 
     [Serializable]

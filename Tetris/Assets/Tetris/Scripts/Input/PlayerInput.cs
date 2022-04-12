@@ -189,6 +189,94 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""General"",
+            ""id"": ""bf50acf2-1485-49dc-9564-0483e20a802f"",
+            ""actions"": [
+                {
+                    ""name"": ""Mouse Delta Input"",
+                    ""type"": ""Value"",
+                    ""id"": ""82e428b1-661e-4c47-9ca5-14636f763427"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ec5c186-f2d6-4a08-b8bc-ed6f1f42e347"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbac40a8-1388-4a6a-852d-1893f09bf778"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""555889f5-c949-43f2-99d9-6438ebf52769"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""97194f8d-5445-4e76-a1d9-e4e3634285ef"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default"",
+                    ""action"": ""Mouse Delta Input"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85af7200-2b96-45e0-b05f-4640d2202c02"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cdfe2ebb-301e-4de3-9417-284e46d40999"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8673c999-82ff-4085-8e0d-b8747f1435d0"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -205,6 +293,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<VirtualMouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
                 }
             ]
         }
@@ -215,6 +308,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_OnGameBoard_Moving = m_OnGameBoard.FindAction("Moving", throwIfNotFound: true);
         m_OnGameBoard_Rotation = m_OnGameBoard.FindAction("Rotation", throwIfNotFound: true);
         m_OnGameBoard_Fallspeedup = m_OnGameBoard.FindAction("Fall speed up", throwIfNotFound: true);
+        // General
+        m_General = asset.FindActionMap("General", throwIfNotFound: true);
+        m_General_MouseDeltaInput = m_General.FindAction("Mouse Delta Input", throwIfNotFound: true);
+        m_General_Exit = m_General.FindAction("Exit", throwIfNotFound: true);
+        m_General_Reload = m_General.FindAction("Reload", throwIfNotFound: true);
+        m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -319,6 +418,63 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         }
     }
     public OnGameBoardActions @OnGameBoard => new OnGameBoardActions(this);
+
+    // General
+    private readonly InputActionMap m_General;
+    private IGeneralActions m_GeneralActionsCallbackInterface;
+    private readonly InputAction m_General_MouseDeltaInput;
+    private readonly InputAction m_General_Exit;
+    private readonly InputAction m_General_Reload;
+    private readonly InputAction m_General_Pause;
+    public struct GeneralActions
+    {
+        private @PlayerInput m_Wrapper;
+        public GeneralActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseDeltaInput => m_Wrapper.m_General_MouseDeltaInput;
+        public InputAction @Exit => m_Wrapper.m_General_Exit;
+        public InputAction @Reload => m_Wrapper.m_General_Reload;
+        public InputAction @Pause => m_Wrapper.m_General_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_General; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
+        public void SetCallbacks(IGeneralActions instance)
+        {
+            if (m_Wrapper.m_GeneralActionsCallbackInterface != null)
+            {
+                @MouseDeltaInput.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMouseDeltaInput;
+                @MouseDeltaInput.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMouseDeltaInput;
+                @MouseDeltaInput.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMouseDeltaInput;
+                @Exit.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnExit;
+                @Reload.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReload;
+                @Pause.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_GeneralActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @MouseDeltaInput.started += instance.OnMouseDeltaInput;
+                @MouseDeltaInput.performed += instance.OnMouseDeltaInput;
+                @MouseDeltaInput.canceled += instance.OnMouseDeltaInput;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public GeneralActions @General => new GeneralActions(this);
     private int m_DefaultSchemeIndex = -1;
     public InputControlScheme DefaultScheme
     {
@@ -333,5 +489,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMoving(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
         void OnFallspeedup(InputAction.CallbackContext context);
+    }
+    public interface IGeneralActions
+    {
+        void OnMouseDeltaInput(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

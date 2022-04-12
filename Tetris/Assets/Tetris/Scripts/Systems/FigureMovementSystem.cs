@@ -20,14 +20,14 @@ namespace Tetris.Scripts.Systems
 
         public void Run()
         {
-            ref var currentControllableFigureEntity = ref _runtimeData.CurrentControllableFigure;
+            ref var currentControllableFigureEntity = ref _runtimeData.CurrentFigure;
             if (currentControllableFigureEntity == default || !currentControllableFigureEntity.IsAlive()) return;
             ref var movableFigureComponent = ref currentControllableFigureEntity.Get<MovableFigureComponent>();
             ref var remainingTimeToNextMove = ref movableFigureComponent.RemainingTimeToNextMove;
             ref var moveInput = ref _playerInputFilter.Get1(0).MoveInput;
 
             if (!_moveInputEventFilter.IsEmpty())
-                remainingTimeToNextMove = _configuration.TimeBetweenFigureMoves;
+                remainingTimeToNextMove = _configuration.TimeAfterFirstMoveClick;
             else if (moveInput != 0)
             {
                 if (remainingTimeToNextMove > 0)

@@ -3,7 +3,7 @@ using Tetris.Data;
 using Tetris.Scripts.Components.Requests;
 using UnityEngine;
 
-namespace Tetris.Scripts.Systems.Initializations
+namespace Tetris.Scripts.Systems.Init
 {
     public class ContainersGameBoardInitSystem : IEcsInitSystem
     {

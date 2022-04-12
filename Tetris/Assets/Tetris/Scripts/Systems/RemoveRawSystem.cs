@@ -2,6 +2,7 @@
 using Leopotam.Ecs;
 using Tetris.Data;
 using Tetris.Scripts.Components;
+using Tetris.Scripts.Components.Events;
 using Tetris.Scripts.Components.Requests;
 using Tetris.Scripts.Components.Tags;
 using Tetris.Scripts.MonoBehaviours;
@@ -24,7 +25,7 @@ namespace Tetris.Scripts.Systems
             ref var figureMatrix =
                 ref _figureStoppedFallingEventsFilter.GetEntity(0).Get<FigureComponent>().CellsMatrix;
             
-            var removingRawIndexes = new List<uint>();
+            var removingRowsIndexes = new List<uint>();
             for (var y = 0; y < figureMatrix.GetLength(0); y++)
                 for (var x = 0; x < figureMatrix.GetLength(1); x++)
                 {
@@ -47,21 +48,20 @@ namespace Tetris.Scripts.Systems
                             break;
                     }
 
-                    Debug.Log(solidCellsGameObjectsLine.Count);
                     if (solidCellsGameObjectsLine.Count == _configuration.CellsGameBoardWidth)
                     {
-                        removingRawIndexes.Add((uint)gameBoardY);
+                        removingRowsIndexes.Add((uint)gameBoardY);
                         break;
                     }
                 }
 
-            if (removingRawIndexes.Count == 0) return;
+            if (removingRowsIndexes.Count == 0) return;
             
             var requestEntity = _world.NewEntity();
             ref var updateGameBoardViewRequest = ref requestEntity.Get<UpdateGameBoardViewRequest>();
             ref var cellPositionsToHide = ref updateGameBoardViewRequest.CellPositionsToHide;
             cellPositionsToHide = new List<Vector2Int>();
-            foreach (var removingRawIndex in removingRawIndexes)
+            foreach (var removingRawIndex in removingRowsIndexes)
             {
                 for (var x = 0; x < _runtimeData.CellsGameBoard.GetLength(1); x++)
                 {
@@ -73,7 +73,8 @@ namespace Tetris.Scripts.Systems
                     cellEntity.Destroy();
                 }    
             }
-            
+
+            _world.NewEntity().Get<RowsRemovedEvent>().RemovedRowsIndexes = removingRowsIndexes;
         }
     }
 }

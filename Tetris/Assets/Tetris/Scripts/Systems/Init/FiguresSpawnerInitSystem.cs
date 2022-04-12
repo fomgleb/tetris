@@ -3,7 +3,7 @@ using Tetris.Data;
 using Tetris.Scripts.Components;
 using Tetris.Scripts.Components.Requests;
 
-namespace Tetris.Scripts.Systems.Initializations
+namespace Tetris.Scripts.Systems.Init
 {
     public class FiguresSpawnerInitSystem : IEcsInitSystem
     {

@@ -19,11 +19,11 @@ namespace Tetris.Scripts.Systems
 
             ref var figuresSpawnerEntity = ref _runtimeData.FiguresSpawnerEntity;
             var existingFigures = _configuration.ExistingFigures;
-            var spawnFigureIndex = Random.Range(0, existingFigures.Length);
+            var spawningFigureIndex = _runtimeData.NextFigureIndex;
             
             ref var initializeFigureRequest = ref figuresSpawnerEntity.Get<InitializeFigureRequest>();
 
-            initializeFigureRequest.Figure = existingFigures[spawnFigureIndex];
+            initializeFigureRequest.Figure = existingFigures[spawningFigureIndex];
         }
     }
 }

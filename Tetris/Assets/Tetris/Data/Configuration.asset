@@ -13,16 +13,19 @@ MonoBehaviour:
   m_Name: Configuration
   m_EditorClassIdentifier: 
   containersGameBoardWidth: 10
-  containersGameBoardHeight: 16
+  containersGameBoardHeight: 20
   containerPrefab: {fileID: 5310667287412813519, guid: e8c0a878a50ac4445a72afc4595c4abd, type: 3}
-  leftTopContainerPosition: {x: 0.5, y: 0.5}
+  leftTopContainerPosition: {x: 0.5, y: -0.5}
   indentBetweenContainers: 0
   cellsGameBoardWidth: 10
-  cellsGameBoardHeight: 19
+  cellsGameBoardHeight: 23
   cellPrefab: {fileID: 924992352114114037, guid: ac5bbd9724f38d24b9cd4fe052e1016c, type: 3}
-  leftTopCellPosition: {x: 0.5, y: 3.5}
+  leftTopCellPosition: {x: 0.5, y: 2.5}
   indentBetweenCells: 0
-  oneTickDuration: 1
+  nextFigureBoardWidth: 4
+  nextFigureBoardHeight: 4
+  leftTopElementPositionOnNextFigureBoard: {x: 11.5, y: -4.5}
+  oneTickDuration: 0.7
   existingFigures:
   - rotationStates:
     - matrix:
@@ -55,6 +58,95 @@ MonoBehaviour:
       - line: 00010100
     matrixWidth: 4
     color: {r: 1, g: 0.2527016, b: 0.14509803, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 00000100
+      - line: 00010100
+    - matrix:
+      - line: 00000000
+      - line: 00010000
+      - line: 00010101
+      - line: 00000000
+    - matrix:
+      - line: 00000000
+      - line: 00000101
+      - line: 00000100
+      - line: 00000100
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 00010101
+      - line: 00000001
+    matrixWidth: 4
+    color: {r: 1, g: 0.14509803, b: 0.88752186, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00010000
+      - line: 00010000
+      - line: 00010000
+      - line: 00010000
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 01010101
+      - line: 00000000
+    matrixWidth: 4
+    color: {r: 0.14509803, g: 0.78276956, b: 1, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 01010000
+      - line: 00010100
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 00010100
+      - line: 00010000
+    matrixWidth: 4
+    color: {r: 0.14509803, g: 1, b: 0.14815459, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 00000101
+      - line: 00010100
+    - matrix:
+      - line: 00000000
+      - line: 00010000
+      - line: 00010100
+      - line: 00000100
+    matrixWidth: 4
+    color: {r: 0.5834333, g: 0.14509803, b: 1, a: 1}
+  - rotationStates:
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 00010100
+      - line: 00000100
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 00010101
+      - line: 00000000
+    - matrix:
+      - line: 00000000
+      - line: 00000100
+      - line: 00000101
+      - line: 00000100
+    - matrix:
+      - line: 00000000
+      - line: 00000000
+      - line: 00010101
+      - line: 00000100
+    matrixWidth: 4
+    color: {r: 0.22075468, g: 0.2837354, b: 1, a: 1}
   figureSpawnPointOnGameBoard: {x: 3, y: 0}
-  timeBetweenFigureMoves: 0.08
+  timeBetweenFigureMoves: 0.06
+  timeAfterFirstMoveClick: 0.2
   timeBetweenFigureFallSpeedUps: 0.05
+  scoreForFigureFell: 5
+  scoreForRowRemoved: 50
+  progressDataFileName: ProgressData.dat

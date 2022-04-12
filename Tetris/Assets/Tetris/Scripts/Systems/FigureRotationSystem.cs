@@ -21,7 +21,7 @@ namespace Tetris.Scripts.Systems
         {
             if (_rotateInputEvent.IsEmpty()) return;
 
-            ref var currentControllableFigure = ref _runtimeData.CurrentControllableFigure;
+            ref var currentControllableFigure = ref _runtimeData.CurrentFigure;
             if (currentControllableFigure == default || !currentControllableFigure.IsAlive()) return;
             ref var figureComponent = ref currentControllableFigure.Get<FigureComponent>();
             ref var rotationStates = ref figureComponent.RotationStates;
@@ -48,7 +48,7 @@ namespace Tetris.Scripts.Systems
                     if (!nextRotationState.matrix[y].line[x]) continue;
                     
                     var cellPositionOnGameBoard = leftTopCellPositionOnMatrixOnGameBoard + new Vector2Int(x, y);
-                    if (cellPositionOnGameBoard.x > _configuration.CellsGameBoardWidth ||
+                    if (cellPositionOnGameBoard.x > _configuration.CellsGameBoardWidth - 1 ||
                         cellPositionOnGameBoard.x < 0 ||
                         cellPositionOnGameBoard.y > _configuration.CellsGameBoardHeight - 1)
                         return;

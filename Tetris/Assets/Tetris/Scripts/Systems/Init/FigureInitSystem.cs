@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using ArrayExtensions;
-using Leopotam.Ecs;
+﻿using Leopotam.Ecs;
 using Tetris.Data;
 using Tetris.Scripts.Components;
+using Tetris.Scripts.Components.Events;
 using Tetris.Scripts.Components.Requests;
 using Tetris.Scripts.Components.Tags;
 using UnityEngine;
 
-namespace Tetris.Scripts.Systems.Initializations
+namespace Tetris.Scripts.Systems.Init
 {
     public class FigureInitSystem : IEcsRunSystem
     {
@@ -57,7 +56,8 @@ namespace Tetris.Scripts.Systems.Initializations
                         cellsMatrix[y, x] = newCellEntity;
                     }
 
-                _runtimeData.CurrentControllableFigure = figureEntity;
+                _runtimeData.CurrentFigure = figureEntity;
+                figureEntity.Get<FigureSpawnedEvent>();
                 _world.NewEntity().Get<UpdateGameBoardViewRequest>();
             }
         }

@@ -5,7 +5,7 @@ using Tetris.Scripts.Components.References;
 using Tetris.Scripts.Components.Requests;
 using UnityEngine;
 
-namespace Tetris.Scripts.Systems.Initializations
+namespace Tetris.Scripts.Systems.Init
 {
     public class ContainerInitSystem : IEcsInitSystem
     {

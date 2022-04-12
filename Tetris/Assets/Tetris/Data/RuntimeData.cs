@@ -7,9 +7,14 @@ namespace Tetris.Data
     {
         public EcsEntity[,] ContainersGameBoard;
         public GameObject[,] CellsGameBoard;
+        public GameObject[,] NextFigureBoard;
         public EcsEntity FiguresSpawnerEntity;
-        public EcsEntity CurrentControllableFigure;
+        public EcsEntity CurrentFigure;
+        public uint NextFigureIndex;
         public float RemainingTimeToNextTick;
         public float RemainingTimeToNextFallSpeedUp;
+        public EcsEntity PlayerInputEntity;
+        public int Score = 0;
+        public int HighScore = 0;
     }
 }
