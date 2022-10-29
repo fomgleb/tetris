@@ -1,5 +1,5 @@
 # Tetris
-It's just Tetris writed using LeoECS framework:
+It's just Tetris written using LeoECS framework:
 https://github.com/Leopotam/ecs
 
 # Where to play
